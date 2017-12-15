@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #todo:以下加载额外功能模块
+    'tinymce',#富文本模块
     'cart',#购物车模块
     'goods',#商品模块
     'user',#用户模块
