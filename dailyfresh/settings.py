@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -44,8 +44,8 @@ INSTALLED_APPS = (
     'tinymce',#富文本模块
     'cart',#购物车模块
     'goods',#商品模块
-    'user',#用户模块
-    'order',#订单模块
+    # 'user',#用户模块
+    # 'order',#订单模块
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,8 +91,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         #todo:数据库名、端口、ip、用户名、密码
         'NAME': 'dailyfresh',
-        'POST':3306,
-        'HOST':'loaclhost',
+        'POST':'3306',
+        'HOST':'localhost',
         'USER':'root',
         'PASSWORD':'mysql'
     }

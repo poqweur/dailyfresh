@@ -1,10 +1,11 @@
+#coding:utf-8
 from django.db import models
 
 class BaseModels(models.Model):
-    create_time=models.DateTimeField(verbose_name='´´½¨Ê±¼ä',auto_now_add=True)#auto_now_add¾ÍÊÇÉèÖÃ´´½¨Ê±¼äµÄ²ÎÊı
-    update_time=models.DateTimeField(verbose_name='¸üĞÂÊ±¼ä',auto_now=True)#auto_nowÉèÖÃ¸üĞÂÊ±¼ä
-    is_delete=models.BooleanField(default=False,verbose_name='É¾³ı±ê¼Ç')
+    create_time=models.DateTimeField(verbose_name='åˆ›å»ºæ—¶é—´',auto_now_add=True)#auto_now_addå°±æ˜¯è®¾ç½®åˆ›å»ºæ—¶é—´çš„å‚æ•°
+    update_time=models.DateTimeField(verbose_name='æ›´æ–°æ—¶é—´',auto_now=True)#auto_nowè®¾ç½®æ›´æ–°æ—¶é—´
+    is_delete=models.BooleanField(default=False,verbose_name='åˆ é™¤æ ‡è®°')
 
     class Meta:
-        #ËµÃ÷ÕâÊÇ¸ö³éÏóÀà
+        #è¯´æ˜è¿™æ˜¯ä¸ªæŠ½è±¡ç±»
         abstract=True

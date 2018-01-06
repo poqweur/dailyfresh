@@ -1,24 +1,25 @@
+#coding:utf-8
 from django.db import models
 from db.base_model import BaseModels
 
 
 # Create your models here.
 
-# ¶©µ¥±í
+# è®¢å•è¡¨
 class OrderInfo(BaseModels):
-    # Ö§¸¶·½Ê½
+    # æ”¯ä»˜æ–¹å¼
     PAY_METHODS = {
-        '1': "»õµ½¸¶¿î",
-        '2': "Î¢ĞÅÖ§¸¶",
-        '3': "Ö§¸¶±¦",
-        '4': 'ÒøÁªÖ§¸¶'
+        '1': "è´§åˆ°ä»˜æ¬¾",
+        '2': "å¾®ä¿¡æ”¯ä»˜",
+        '3': "æ”¯ä»˜å®",
+        '4': 'é“¶è”æ”¯ä»˜'
     }
-    # ÏÖ½ğºÍÖ§¸¶±¦
+    # ç°é‡‘å’Œæ”¯ä»˜å®
     PAY_METHODS_ENUM = {
         "CASH": 1,
         "ALIPAY": 2
     }
-    # ¶©µ¥×´Ì¬
+    # è®¢å•çŠ¶æ€
     ORDER_STATUS_ENUM = {
         "UNPAID": 1,
         "UNSEND": 2,
@@ -28,53 +29,53 @@ class OrderInfo(BaseModels):
     }
 
     PAY_METHOD_CHOICES = (
-        (1, '»õµ½¸¶¿î'),
-        (2, 'Î¢ĞÅÖ§¸¶'),
-        (3, 'Ö§¸¶±¦'),
-        (4, 'ÒøÁªÖ§¸¶'),
+        (1, 'è´§åˆ°ä»˜æ¬¾'),
+        (2, 'å¾®ä¿¡æ”¯ä»˜'),
+        (3, 'æ”¯ä»˜å®'),
+        (4, 'é“¶è”æ”¯ä»˜'),
     )
 
     ORDER_STATUS = {
-        1: '´ıÖ§¸¶',
-        2: '´ı·¢»õ',
-        3: '´ıÊÕ»õ',
-        4: '´ıÆÀ¼Û',
-        5: 'ÒÑÍê³É'
+        1: 'å¾…æ”¯ä»˜',
+        2: 'å¾…å‘è´§',
+        3: 'å¾…æ”¶è´§',
+        4: 'å¾…è¯„ä»·',
+        5: 'å·²å®Œæˆ'
     }
 
     ORDER_STATUS_CHOICES = (
-        (1, '´ıÖ§¸¶'),
-        (2, '´ı·¢»õ'),
-        (3, '´ıÊÕ»õ'),
-        (4, '´ıÆÀ¼Û'),
-        (5, 'ÒÑÍê³É')
+        (1, 'å¾…æ”¯ä»˜'),
+        (2, 'å¾…å‘è´§'),
+        (3, 'å¾…æ”¶è´§'),
+        (4, 'å¾…è¯„ä»·'),
+        (5, 'å·²å®Œæˆ')
     )
 
-    order_id = models.CharField(max_length=128, primary_key=True, verbose_name='¶©µ¥id')
-    user = models.ForeignKey('user.User', verbose_name='ÓÃ»§', null=True)
-    addr = models.ForeignKey('user.Address', verbose_name='µØÖ·')
-    pay_method = models.SmallIntegerField(choices=PAY_METHOD_CHOICES, default=3, verbose_name='Ö§¸¶·½Ê½')
-    total_count = models.IntegerField(default=1, verbose_name='ÉÌÆ·ÊıÁ¿')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='ÉÌÆ·×Ü¼Û')
-    transit_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='¶©µ¥ÔË·Ñ')
-    order_status = models.SmallIntegerField(choices=ORDER_STATUS_CHOICES, default=1, verbose_name='¶©µ¥×´Ì¬')
-    trade_no = models.CharField(max_length=128, default='', verbose_name='Ö§¸¶±àºÅ')
+    order_id = models.CharField(max_length=128, primary_key=True, verbose_name='è®¢å•id')
+    user = models.ForeignKey('user.User', verbose_name='ç”¨æˆ·', null=True)
+    addr = models.ForeignKey('user.Address', verbose_name='åœ°å€')
+    pay_method = models.SmallIntegerField(choices=PAY_METHOD_CHOICES, default=3, verbose_name='æ”¯ä»˜æ–¹å¼')
+    total_count = models.IntegerField(default=1, verbose_name='å•†å“æ•°é‡')
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='å•†å“æ€»ä»·')
+    transit_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='è®¢å•è¿è´¹')
+    order_status = models.SmallIntegerField(choices=ORDER_STATUS_CHOICES, default=1, verbose_name='è®¢å•çŠ¶æ€')
+    trade_no = models.CharField(max_length=128, default='', verbose_name='æ”¯ä»˜ç¼–å·')
 
     class Meta:
         db_table = 'df_order_info'
-        verbose_name = '¶©µ¥ĞÅÏ¢'
+        verbose_name = 'è®¢å•ä¿¡æ¯'
         verbose_name_plural = verbose_name
 
 
-# ¶©µ¥ÉÌÆ·Ä£ĞÍ
+# è®¢å•å•†å“æ¨¡å‹
 class OrderGoods(BaseModels):
-    order = models.ForeignKey('OrderInfo', verbose_name='¶©µ¥')
-    sku = models.ForeignKey('goods.GoodSKU', verbose_name='ÉÌÆ·SKU')
-    count = models.IntegerField(default=1, verbose_name='ÉÌÆ·ÊıÄ¿')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='ÉÌÆ·¼Û¸ñ')
-    comment = models.CharField(max_length=256, default='', verbose_name='ÆÀÂÛ')
+    order = models.ForeignKey('OrderInfo', verbose_name='è®¢å•')
+    sku = models.ForeignKey('goods.GoodSKU', verbose_name='å•†å“SKU')
+    count = models.IntegerField(default=1, verbose_name='å•†å“æ•°ç›®')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='å•†å“ä»·æ ¼')
+    comment = models.CharField(max_length=256, default='', verbose_name='è¯„è®º')
 
     class Meta:
         db_table = 'df_order_goods'
-        verbose_name = '¶©µ¥ÉÌÆ·'
+        verbose_name = 'è®¢å•å•†å“'
         verbose_name_plural = verbose_name

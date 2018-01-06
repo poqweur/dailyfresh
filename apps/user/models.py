@@ -1,32 +1,33 @@
-from django.db import models  # ÕâÀï·ÅµÄÊÇ±íÖĞ¶ÔÓ¦µÄ×Ö¶Î
-# µ¼Èë×Ô¼ºÖØĞ´µÄÄ£ĞÍ¸¸Àà
+#coding:utf-8
+from django.db import models  # è¿™é‡Œæ”¾çš„æ˜¯è¡¨ä¸­å¯¹åº”çš„å­—æ®µ
+# å¯¼å…¥è‡ªå·±é‡å†™çš„æ¨¡å‹çˆ¶ç±»
 from db.base_model import BaseModels
-# todo:À©Õ¹ÒÑÓĞµÄÓÃ»§Ä£ĞÍ,ÖĞÎÄÎÄµµ×Ô¶¨ÒåÓÃ»§ÈÏÖ¤
+# todo:æ‰©å±•å·²æœ‰çš„ç”¨æˆ·æ¨¡å‹,ä¸­æ–‡æ–‡æ¡£è‡ªå®šä¹‰ç”¨æˆ·è®¤è¯
 from django.contrib.auth.models import AbstractUser
 
 
-# ÓÃ»§±í
+# ç”¨æˆ·è¡¨
 class User(AbstractUser, BaseModels):
-    # ÔªÀàÑ¡Ïî
+    # å…ƒç±»é€‰é¡¹
     class Meta:
-        # Êı¾İ¿âÖĞµÄ±íÃû
+        # æ•°æ®åº“ä¸­çš„è¡¨å
         db_table = 'df_user'
-        # Õ¾µãÖĞÏÔÊ¾µÄÃû×Ö
-        verbose_name = 'ÓÃ»§'
-        # Õ¾µãÖĞÈ¡Ïû¸´ÊıÏÔÊ¾
+        # ç«™ç‚¹ä¸­æ˜¾ç¤ºçš„åå­—
+        verbose_name = 'ç”¨æˆ·'
+        # ç«™ç‚¹ä¸­å–æ¶ˆå¤æ•°æ˜¾ç¤º
         verbose_name_plural = verbose_name
 
 
-# µØÖ·±í
+# åœ°å€è¡¨
 class Address(BaseModels):
-    user = models.ForeignKey('User', verbose_name='ËùÊôÓÃ»§')
-    receiver = models.CharField(max_length=20, verbose_name='ÊÕ¼şÈË')
-    addr = models.CharField(max_length=256, verbose_name='ÊÕ¼şµØÖ·')
-    zip_code = models.CharField(max_length=6, null=True, verbose_name='ÓÊÕş±àÂë')
-    phone = models.CharField(max_length=11, verbose_name='ÁªÏµ·½Ê½')
-    is_default = models.BooleanField(default=False, verbose_name='ÊÇ·ñÄ¬ÈÏ')
+    user = models.ForeignKey('User', verbose_name='æ‰€å±ç”¨æˆ·')
+    receiver = models.CharField(max_length=20, verbose_name='æ”¶ä»¶äºº')
+    addr = models.CharField(max_length=256, verbose_name='æ”¶ä»¶åœ°å€')
+    zip_code = models.CharField(max_length=6, null=True, verbose_name='é‚®æ”¿ç¼–ç ')
+    phone = models.CharField(max_length=11, verbose_name='è”ç³»æ–¹å¼')
+    is_default = models.BooleanField(default=False, verbose_name='æ˜¯å¦é»˜è®¤')
 
     class Meta:
         db_table = 'df_address'
-        verbose_name = 'µØÖ·'
+        verbose_name = 'åœ°å€'
         verbose_name_plural = verbose_name

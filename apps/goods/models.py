@@ -1,97 +1,98 @@
+#coding:utf-8
 from django.db import models
 from db.base_model import BaseModels
 from tinymce.models import HTMLField
 
 
 # Create your models here.
-# ÉÌÆ·Ä£ĞÍÀà
+# å•†å“æ¨¡å‹ç±»
 class GoodsType(BaseModels):
-    name = models.CharField(max_length=20, verbose_name='ÖÖÀàÃû³Æ')
-    logo = models.CharField(max_length=20, verbose_name='±êÊ¶')
-    # ÒòÎªÒÔ¸Ä±ädjangoÄ¬ÈÏ´æ´¢·½Ê½ËùÒÔ¿ÉÒÔËæ±ãĞ´upload
-    image = models.ImageField(upload_to='imagfiles', verbose_name='ÉÌÆ·Í¼Æ¬')
+    name = models.CharField(max_length=20, verbose_name='ç§ç±»åç§°')
+    logo = models.CharField(max_length=20, verbose_name='æ ‡è¯†')
+    # å› ä¸ºä»¥æ”¹å˜djangoé»˜è®¤å­˜å‚¨æ–¹å¼æ‰€ä»¥å¯ä»¥éšä¾¿å†™upload
+    image = models.ImageField(upload_to='imagfiles', verbose_name='å•†å“å›¾ç‰‡')
 
     class Meta:
         db_table = 'df_goods_type'
-        verbose_name = 'ÉÌÆ·ÖÖÀà'
+        verbose_name = 'å•†å“ç§ç±»'
         verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.name
 
 
-# ÉÌÆ·SKUÄ£ĞÍ
+# å•†å“SKUæ¨¡å‹
 class GoodSKU(BaseModels):
     status_choices = (
-        (0, 'ÏÂÏß'),
-        (1, 'ÉÏÏß')
+        (0, 'ä¸‹çº¿'),
+        (1, 'ä¸Šçº¿')
     )
-    typeof = models.ForeignKey('GoodsType', verbose_name='ÉÌÆ·ÖÖÀà')
-    goods = models.ForeignKey('Goods', verbose_name='ÉÌÆ·SPU')
-    name = models.CharField(max_length=20, verbose_name='ÉÌÆ·Ãû³Æ')
-    desc = models.CharField(max_length=256, verbose_name='ÉÌÆ·¼ò½é')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='ÉÌÆ·¼Û¸ñ')
-    unite = models.CharField(max_length=20, verbose_name='ÉÌÆ·µ¥Î»')
-    image = models.ImageField(upload_to='goods', verbose_name='ÉÌÆ·Í¼Æ¬')
-    stock = models.IntegerField(default=1, verbose_name='ÉÌÆ·¿â´æ')
-    sales = models.IntegerField(default=0, verbose_name='ÉÌÆ·ÏúÁ¿')
-    status = models.SmallIntegerField(default=1, choices=status_choices, verbose_name='ÉÌÆ·×´Ì¬')
+    typeof = models.ForeignKey('GoodsType', verbose_name='å•†å“ç§ç±»')
+    goods = models.ForeignKey('Goods', verbose_name='å•†å“SPU')
+    name = models.CharField(max_length=20, verbose_name='å•†å“åç§°')
+    desc = models.CharField(max_length=256, verbose_name='å•†å“ç®€ä»‹')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='å•†å“ä»·æ ¼')
+    unite = models.CharField(max_length=20, verbose_name='å•†å“å•ä½')
+    image = models.ImageField(upload_to='goods', verbose_name='å•†å“å›¾ç‰‡')
+    stock = models.IntegerField(default=1, verbose_name='å•†å“åº“å­˜')
+    sales = models.IntegerField(default=0, verbose_name='å•†å“é”€é‡')
+    status = models.SmallIntegerField(default=1, choices=status_choices, verbose_name='å•†å“çŠ¶æ€')
 
     class Meta:
         db_table = 'df_goods_sku'
-        verbose_name = 'ÉÌÆ·'
+        verbose_name = 'å•†å“'
         verbose_name_plural = verbose_name
 
 
-# ÉÌÆ·SPUÄ£ĞÍ
+# å•†å“SPUæ¨¡å‹
 class Goods(BaseModels):
-    name = models.CharField(max_length=20, verbose_name='ÉÌÆ·SPUÃû³Æ')
-    detail = HTMLField(blank=True, verbose_name='ÉÌÆ·ÏêÇé')
+    name = models.CharField(max_length=20, verbose_name='å•†å“SPUåç§°')
+    detail = HTMLField(blank=True, verbose_name='å•†å“è¯¦æƒ…')
 
     class Meta:
         db_table = 'df_goods'
-        verbose_name = 'ÉÌÆ·SPU'
+        verbose_name = 'å•†å“SPU'
         verbose_name_plural = verbose_name
 
 
-# Ê×Ò³ÂÖ²¥ÉÌÆ·Õ¹Ê¾Ä£ĞÍ
+# é¦–é¡µè½®æ’­å•†å“å±•ç¤ºæ¨¡å‹
 class IndexGoodsBanner(BaseModels):
     sku = models.ForeignKey('GoodSKU')
-    image = models.ImageField(upload_to='banner', verbose_name='Í¼Æ¬')
-    index = models.SmallIntegerField(default=0, verbose_name='Õ¹Ê¾Ë³Ğò')
+    image = models.ImageField(upload_to='banner', verbose_name='å›¾ç‰‡')
+    index = models.SmallIntegerField(default=0, verbose_name='å±•ç¤ºé¡ºåº')
 
     class Meta:
         db_table = 'df_index_banner'
-        verbose_name = 'Ê×Ò³ÂÖ²¥ÉÌÆ·'
+        verbose_name = 'é¦–é¡µè½®æ’­å•†å“'
         verbose_name_plural = verbose_name
 
 
-# Ê×Ò³·ÖÀàÉÌÆ·Õ¹Ê¾Ä£ĞÍ
+# é¦–é¡µåˆ†ç±»å•†å“å±•ç¤ºæ¨¡å‹
 class IndexTypeGoodsBanner(BaseModels):
     DISPLAY_TYPE_CHOICES = (
-        (0, "±êÌâ"),
-        (1, "Í¼Æ¬")
+        (0, "æ ‡é¢˜"),
+        (1, "å›¾ç‰‡")
     )
 
-    type = models.ForeignKey('GoodsType', verbose_name='ÉÌÆ·ÀàĞÍ')
-    sku = models.ForeignKey('GoodSKU', verbose_name='ÉÌÆ·SKU')
-    display_type = models.SmallIntegerField(default=1, choices=DISPLAY_TYPE_CHOICES, verbose_name='Õ¹Ê¾ÀàĞÍ')
-    index = models.SmallIntegerField(default=0, verbose_name='Õ¹Ê¾Ë³Ğò')
+    type = models.ForeignKey('GoodsType', verbose_name='å•†å“ç±»å‹')
+    sku = models.ForeignKey('GoodSKU', verbose_name='å•†å“SKU')
+    display_type = models.SmallIntegerField(default=1, choices=DISPLAY_TYPE_CHOICES, verbose_name='å±•ç¤ºç±»å‹')
+    index = models.SmallIntegerField(default=0, verbose_name='å±•ç¤ºé¡ºåº')
 
     class Meta:
         db_table = 'df_index_type_goods'
-        verbose_name = "Ö÷Ò³·ÖÀàÕ¹Ê¾ÉÌÆ·"
+        verbose_name = "ä¸»é¡µåˆ†ç±»å±•ç¤ºå•†å“"
         verbose_name_plural = verbose_name
 
 
 class IndexPromotionBanner(BaseModels):
-    '''Ê×Ò³´ÙÏú»î¶¯Ä£ĞÍÀà'''
-    name = models.CharField(max_length=20, verbose_name='»î¶¯Ãû³Æ')
-    url = models.CharField(max_length=256, verbose_name='»î¶¯Á´½Ó')
-    image = models.ImageField(upload_to='banner', verbose_name='»î¶¯Í¼Æ¬')
-    index = models.SmallIntegerField(default=0, verbose_name='Õ¹Ê¾Ë³Ğò')
+    '''é¦–é¡µä¿ƒé”€æ´»åŠ¨æ¨¡å‹ç±»'''
+    name = models.CharField(max_length=20, verbose_name='æ´»åŠ¨åç§°')
+    url = models.CharField(max_length=256, verbose_name='æ´»åŠ¨é“¾æ¥')
+    image = models.ImageField(upload_to='banner', verbose_name='æ´»åŠ¨å›¾ç‰‡')
+    index = models.SmallIntegerField(default=0, verbose_name='å±•ç¤ºé¡ºåº')
 
     class Meta:
         db_table = 'df_index_promotion'
-        verbose_name = "Ö÷Ò³´ÙÏú»î¶¯"
+        verbose_name = "ä¸»é¡µä¿ƒé”€æ´»åŠ¨"
         verbose_name_plural = verbose_name
